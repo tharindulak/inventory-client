@@ -1,8 +1,8 @@
 package ds.tutorials.communication.client;
 
-import ds.tutorial.communication.grpc.generated.CheckBalanceRequest;
-import ds.tutorial.communication.grpc.generated.CheckBalanceResponse;
-import ds.tutorial.communication.grpc.generated.CheckBalanceServiceGrpc;
+import ds.tutorial.communication.grpc.generated.CheckQuantityRequest;
+import ds.tutorial.communication.grpc.generated.CheckQuantityResponse;
+import ds.tutorial.communication.grpc.generated.CheckQuantityServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class CheckBalanceServiceClient {
     private ManagedChannel channel = null;
-    CheckBalanceServiceGrpc.CheckBalanceServiceBlockingStub clientStub = null;
+    CheckQuantityServiceGrpc.CheckQuantityServiceBlockingStub clientStub = null;
     String host = null;
     int port = -1;
 
@@ -25,7 +25,7 @@ public class CheckBalanceServiceClient {
         channel = ManagedChannelBuilder.forAddress("localhost", port)
                 .usePlaintext()
                 .build();
-        clientStub = CheckBalanceServiceGrpc.newBlockingStub(channel);
+        clientStub = CheckQuantityServiceGrpc.newBlockingStub(channel);
     }
     public void closeConnection() {
         channel.shutdown();
@@ -34,15 +34,15 @@ public class CheckBalanceServiceClient {
     public void processUserRequests() throws InterruptedException {
         while (true) {
             Scanner userInput = new Scanner(System.in);
-            System.out.println("\nEnter Account ID to check the balance :");
-            String accountId = userInput.nextLine().trim();
-            System.out.println("Requesting server to check the account balance for " + accountId.toString());
-            CheckBalanceRequest request = CheckBalanceRequest
+            System.out.println("\nEnter Item ID to check the quantity :");
+            String itemId = userInput.nextLine().trim();
+            System.out.println("Requesting server to check the quantity for " + itemId.toString());
+            CheckQuantityRequest request = CheckQuantityRequest
                     .newBuilder()
-                    .setAccountId(accountId)
+                    .setItemId(itemId)
                     .build();
-            CheckBalanceResponse response = clientStub.checkBalance(request);
-            System.out.printf("My balance is " + response.getBalance() + " LKR");
+            CheckQuantityResponse response = clientStub.checkQuantity(request);
+            System.out.printf("The quantity for the item " + itemId.toString() +  " is " + response.getQuantity());
             Thread.sleep(1000);
         }
     }

@@ -1,6 +1,8 @@
 package ds.tutorials.communication.client;
 
-import ds.tutorial.communication.grpc.generated.*;
+import ds.tutorial.communication.grpc.generated.SetQuantityRequest;
+import ds.tutorial.communication.grpc.generated.SetQuantityResponse;
+import ds.tutorial.communication.grpc.generated.SetQuantityServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
@@ -8,7 +10,7 @@ import java.util.Scanner;
 
 public class SetBalanceServiceClient {
     private ManagedChannel channel = null;
-    SetBalanceServiceGrpc.SetBalanceServiceBlockingStub clientStub = null;
+    SetQuantityServiceGrpc.SetQuantityServiceBlockingStub clientStub = null;
     String host = null;
     int port = -1;
 
@@ -23,7 +25,7 @@ public class SetBalanceServiceClient {
         channel = ManagedChannelBuilder.forAddress("localhost", port)
                 .usePlaintext()
                 .build();
-        clientStub = SetBalanceServiceGrpc.newBlockingStub(channel);
+        clientStub = SetQuantityServiceGrpc.newBlockingStub(channel);
     }
     public void closeConnection() {
         channel.shutdown();
@@ -32,19 +34,19 @@ public class SetBalanceServiceClient {
     public void processUserRequests() throws InterruptedException {
         while (true) {
             Scanner userInput = new Scanner(System.in);
-            System.out.println("\nEnter Account ID, amount to set the balance :");
-            String input[] = userInput.nextLine().trim().split(",");
-            String accountId = input[0];
-            double amount = Double.parseDouble(input[1]);
-            System.out.println("Requesting server to set the account balance to " + amount + " for " + accountId.toString());
-            SetBalanceRequest request = SetBalanceRequest
+            System.out.println("\nEnter Item ID, quantity to set the quantity :");
+            String[] input = userInput.nextLine().trim().split(",");
+            String itemId = input[0];
+            double quantity = Double.parseDouble(input[1]);
+            System.out.println("Requesting server to set the item quantity to " + quantity + " for " + itemId.toString());
+            SetQuantityRequest request = SetQuantityRequest
                     .newBuilder()
-                    .setAccountId(accountId)
-                    .setValue(amount)
+                    .setItemId(itemId)
+                    .setQuantity(quantity)
                     .setIsSentByPrimary(false)
                     .build();
-            SetBalanceResponse response = clientStub.setBalance(request);
-            System.out.printf("Transaction Status " + (response.getStatus() ? "Sucessful" : "Failed"));
+            SetQuantityResponse response = clientStub.setQuantity(request);
+            System.out.printf("Transaction Status " + (response.getStatus() ? " Successful" : " Failed"));
             Thread.sleep(1000);
         }
     }

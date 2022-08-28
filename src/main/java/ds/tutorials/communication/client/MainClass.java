@@ -7,7 +7,7 @@ public class MainClass {
         String operation = args[2];
 
         if (args.length != 3) {
-            System.out.println("Usage CheckBalanceServiceClient <host> <port> <s(et)|c(heck)");
+            System.out.println("Usage Quantity manager ServiceClient <host> <port> <s(et)|c(heck)");
             System.exit(1);
         }
 
