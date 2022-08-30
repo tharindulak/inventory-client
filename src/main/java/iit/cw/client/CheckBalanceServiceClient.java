@@ -1,4 +1,4 @@
-package ds.tutorials.communication.client;
+package iit.cw.client;
 
 import ds.tutorial.communication.grpc.generated.CheckQuantityRequest;
 import ds.tutorial.communication.grpc.generated.CheckQuantityResponse;
