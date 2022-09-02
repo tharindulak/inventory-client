@@ -1,8 +1,8 @@
 package iit.cw.client;
 
-import ds.tutorial.communication.grpc.generated.CheckQuantityRequest;
-import ds.tutorial.communication.grpc.generated.CheckQuantityResponse;
-import ds.tutorial.communication.grpc.generated.CheckQuantityServiceGrpc;
+import iit.cw.CheckQuantityRequest;
+import iit.cw.CheckQuantityResponse;
+import iit.cw.CheckQuantityServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
