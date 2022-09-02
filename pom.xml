@@ -29,6 +29,11 @@
             <artifactId>grpc-stub</artifactId>
             <version>1.36.0</version>
         </dependency>
+        <dependency>
+            <groupId>cw</groupId>
+            <artifactId>name-service-client</artifactId>
+            <version>version-1</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -5,7 +5,9 @@ import iit.cw.CheckQuantityResponse;
 import iit.cw.CheckQuantityServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import nameService.NameServiceClient;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class CheckBalanceServiceClient {
