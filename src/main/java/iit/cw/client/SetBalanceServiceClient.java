@@ -34,7 +34,7 @@ public class SetBalanceServiceClient {
     public void processUserRequests() throws InterruptedException {
         while (true) {
             Scanner userInput = new Scanner(System.in);
-            System.out.println("\nEnter Item ID, quantity to set the quantity :");
+            System.out.println("\nEnter Item ID,quantity to set the quantity :");
             String[] input = userInput.nextLine().trim().split(",");
             String itemId = input[0];
             double quantity = Double.parseDouble(input[1]);
